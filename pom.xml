@@ -12,7 +12,8 @@
 	<artifactId>controle_de_validade</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>controle_de_validade</name>
-	<description>Projeto na matéria de programação orientada a objetos, aonde faremos um sistema de controle de validade para a ONG Solar dos Unidos</description>
+	<description>Projeto na matéria de programação orientada a objetos, aonde faremos um
+		sistema de controle de validade para a ONG Solar dos Unidos</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -30,11 +31,6 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>io.javalin</groupId>
-			<artifactId>javalin</artifactId>
-			<version>6.3.0</version>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
