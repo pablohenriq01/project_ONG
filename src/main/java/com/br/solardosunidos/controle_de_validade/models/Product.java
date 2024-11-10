@@ -1,9 +1,6 @@
 package com.br.solardosunidos.controle_de_validade.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,4 +18,7 @@ public class Product {
     private String nameProduct;
     @Column(name = "expiration_date")
     private Date expirationDate;
+    @ManyToOne
+    @JoinColumn(name = "fk_loginID")
+    private Login loginRegister;
 }
