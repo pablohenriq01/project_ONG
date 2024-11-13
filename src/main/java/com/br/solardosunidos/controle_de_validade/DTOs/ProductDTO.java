@@ -1,8 +1,10 @@
 package com.br.solardosunidos.controle_de_validade.DTOs;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Date;
 
-public record ProductDTO(String nameProduct,
-                         Date expirationDate,
-                         Long userID) {
+public record ProductDTO(@NotNull String nameProduct,
+                         @NotNull Date expirationDate,
+                         @NotNull Long userID) {
 }
