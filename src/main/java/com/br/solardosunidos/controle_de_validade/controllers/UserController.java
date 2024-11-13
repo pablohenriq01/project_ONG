@@ -41,9 +41,30 @@ public class UserController {
     public ResponseEntity<List<User>> findAll(){
         try {
             List<User> users = userService.listAllUsers();
-            return ResponseEntity.ok(users);
+            return new ResponseEntity<>(users,HttpStatus.OK);
         } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id){
+        try{
+            User user = userService.listUserID(id);
+            userService.deleteUser(user);
+            return new ResponseEntity<>("Usuario excluido",HttpStatus.ACCEPTED);
+        }catch (Exception e){
+            return new ResponseEntity<>("Usuario não localizado no BD",HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody User user){
+        try{
+            userService.updateUser(id, user);
+            return new ResponseEntity<>("Usuario atualizado",HttpStatus.ACCEPTED);
+        }catch (Exception e){
+            return new ResponseEntity<>("Usuario não localizado no BD",HttpStatus.BAD_REQUEST);
         }
     }
 }
