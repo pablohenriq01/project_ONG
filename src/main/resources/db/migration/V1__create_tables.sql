@@ -11,6 +11,6 @@ CREATE TABLE tb_product (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     expiration_date DATE,
-    fk_loginID BIGINT,
-    FOREIGN KEY(fk_loginID) REFERENCES tb_login(id)
+    fk_userID BIGINT,
+    FOREIGN KEY(fk_userID) REFERENCES tb_login(id)
 );
