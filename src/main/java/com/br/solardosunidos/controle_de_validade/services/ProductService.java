@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -24,5 +25,27 @@ public class ProductService {
         User user = userService.listUserID(userID);
         Product product = new Product(nameProduct, expirationDate, user);
         productRepository.save(product);
+    }
+
+    public Product listProductId(Long id){
+        return productRepository.findById(id).get();
+    }
+
+    public List<Product> listAllProducts(){
+        return productRepository.findAll();
+    }
+
+    public void deleteProduct(Product product){
+        productRepository.delete(product);
+    }
+
+    public void updateProduct(Long id, ProductDTO productDTO){
+        Product productUpdate = listProductId(id);
+
+        productUpdate.setNameProduct(productDTO.nameProduct());
+        productUpdate.setExpirationDate(productDTO.expirationDate());
+        productUpdate.setUserRegister(userService.listUserID(productDTO.userID()));
+
+        productRepository.save(productUpdate);
     }
 }

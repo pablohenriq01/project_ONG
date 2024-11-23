@@ -36,12 +36,12 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public void updateUser(Long id, User user){
+    public void updateUser(Long id, UserDTO userDTO){
         User userUpdate = listUserID(id);
 
-        userUpdate.setName(user.getName());
-        userUpdate.setEmail(user.getEmail());
-        userUpdate.setPassword(user.getPassword());
+        userUpdate.setName(userDTO.name());
+        userUpdate.setEmail(userDTO.email());
+        userUpdate.setPassword(userDTO.password());
 
         userRepository.save(userUpdate);
     }

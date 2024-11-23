@@ -7,11 +7,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/product")
@@ -26,6 +24,47 @@ public class ProductController {
             return new ResponseEntity<>(productDTO, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> findById(@RequestBody @PathVariable("id") Long id){
+        try {
+            Product product = productService.listProductId(id);
+            return ResponseEntity.ok(product);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Product>> findAll(){
+        try {
+            List<Product> products = productService.listAllProducts();
+            return new ResponseEntity<>(products,HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id){
+        try{
+            Product product = productService.listProductId(id);
+            productService.deleteProduct(product);
+            return new ResponseEntity<>("Produto excluido",HttpStatus.ACCEPTED);
+        }catch (Exception e){
+            return new ResponseEntity<>("Produto não localizado no BD",HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody ProductDTO productDTO){
+        try{
+            productService.updateProduct(id, productDTO);
+            return new ResponseEntity<>("Produto atualizado",HttpStatus.ACCEPTED);
+        }catch (Exception e){
+            return new ResponseEntity<>("Produto não localizado no BD",HttpStatus.BAD_REQUEST);
         }
     }
 }
