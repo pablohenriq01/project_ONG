@@ -13,12 +13,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     public void registerUser(UserDTO userDTO){
         String name = userDTO.name();
         String email = userDTO.email();
         String password = userDTO.password();
 
         User user = new User(name,email,password);
+        emailService.sendEmailText(email,"Envio de confirmação de cadastro", "Você foi cadastrado no sistema.");
         userRepository.save(user);
     }
 
