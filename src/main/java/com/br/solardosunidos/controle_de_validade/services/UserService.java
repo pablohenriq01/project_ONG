@@ -4,11 +4,9 @@ import com.br.solardosunidos.controle_de_validade.DTOs.UserDTO;
 import com.br.solardosunidos.controle_de_validade.models.User;
 import com.br.solardosunidos.controle_de_validade.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
